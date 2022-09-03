@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrivalCard } from "./ArrivalCard";
+import { ArrivalsContainer, ColumnContainer } from "./components";
 import { IArrivalTimes } from "./services";
 
 interface IProps {
@@ -9,11 +10,13 @@ interface IProps {
 
 export const PlatformColumn = ({ platformNumber, arrivals }: IProps) => {
   return (
-    <div>
-      <h5>Platform {platformNumber}</h5>
-      {arrivals.map((arrival) => (
-        <ArrivalCard key={arrival.id} {...arrival} />
-      ))}
-    </div>
+    <ColumnContainer>
+      <h3>Platform {platformNumber}</h3>
+      <ArrivalsContainer>
+        {arrivals.map((arrival) => (
+          <ArrivalCard key={arrival.id} {...arrival} />
+        ))}
+      </ArrivalsContainer>
+    </ColumnContainer>
   );
 };

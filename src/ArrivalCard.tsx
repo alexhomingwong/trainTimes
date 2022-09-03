@@ -1,13 +1,7 @@
 import { DateTime, Duration } from "luxon";
 import React from "react";
-import styled from "styled-components";
+import { Card } from "./components";
 import { IArrivalTimes } from "./services";
-
-const Card = styled.article`
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-`;
 
 type Props = IArrivalTimes;
 
@@ -27,14 +21,17 @@ export const ArrivalCard = ({
 
   return (
     <Card>
-      <span>{expectedArrivalAs24hr}</span>
+      <div className="arrivalInfo">
+        <span>{expectedArrivalAs24hr}</span>
+        <span className="trainLine">
+          {lineName} ({direction})
+        </span>
+      </div>
       <span>
         {timeToStationAsMinutes === "0"
-          ? "Soon"
+          ? "Now"
           : `${timeToStationAsMinutes} mins`}
       </span>
-      <span>{lineName}</span>
-      <span>{direction}</span>
     </Card>
   );
 };
