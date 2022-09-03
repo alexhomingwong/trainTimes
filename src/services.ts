@@ -5,6 +5,7 @@ export interface IArrivalTimes {
   expectedArrival: string;
   direction: string;
   platformNumber: string;
+  towards: string;
 }
 
 // Map the data from the api to a consistent format the app can expect
@@ -23,6 +24,7 @@ const mapArrivalData = (arrivals: any[]): IArrivalTimes[] => {
       expectedArrival: arrival?.expectedArrival || "",
       platformNumber: platformNumber || "",
       direction: direction || "",
+      towards: arrival.towards || "",
     };
   });
 };

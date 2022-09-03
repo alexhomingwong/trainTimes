@@ -10,6 +10,7 @@ export const ArrivalCard = ({
   timeToStation,
   expectedArrival,
   direction,
+  towards,
 }: Props) => {
   const expectedArrivalAs24hr = DateTime.fromISO(
     expectedArrival
@@ -22,7 +23,9 @@ export const ArrivalCard = ({
   return (
     <Card>
       <div className="arrivalInfo">
-        <span>{expectedArrivalAs24hr}</span>
+        <span>
+          {expectedArrivalAs24hr} - {towards}
+        </span>
         <span className="trainLine">
           {lineName} ({direction})
         </span>
