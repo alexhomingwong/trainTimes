@@ -11,8 +11,8 @@ export const App = () => {
     <>
       <h3>Current Station</h3>
       <h1>{stationName}</h1>
-      {arrivalTimes.map(({ id, ...other }) => {
-        return <ArrivalCard key={id} {...other} />;
+      {arrivalTimes.map((arrival) => {
+        return <ArrivalCard key={arrival.id} {...arrival} />;
       })}
     </>
   );
