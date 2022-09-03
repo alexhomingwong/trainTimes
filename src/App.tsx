@@ -1,4 +1,5 @@
 import React from "react";
+import { ArrivalCard } from "./ArrivalCard";
 import { useCurrentStation } from "./useCurrentStation";
 import { useArrivalTimes } from "./useArrivalTimes";
 
@@ -10,12 +11,8 @@ export const App = () => {
     <>
       <h3>Current Station</h3>
       <h1>{stationName}</h1>
-      {arrivalTimes.map((arrival) => {
-        return (
-          <div key={arrival.id}>
-            Expected arrival: {arrival.expectedArrival}
-          </div>
-        );
+      {arrivalTimes.map(({ id, ...other }) => {
+        return <ArrivalCard key={id} {...other} />;
       })}
     </>
   );

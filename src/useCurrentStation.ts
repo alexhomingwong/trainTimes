@@ -13,9 +13,10 @@ export const useCurrentStation = () => {
   useQuery(stationName, async () => {
     const res = await fetch(`${stopPointApi}/Search/${stationName}`);
     const data = await res.json();
-    if (data.total === 1) {
-      return setStationId(data.matches[0].id);
-    }
+
+    // Should only match to 1 station so check that is the case.
+    // Will need new UI for when allowing searching
+    if (data?.matches?.length === 1) return setStationId(data.matches[0].id);
   });
 
   return { stationName, stationId };
