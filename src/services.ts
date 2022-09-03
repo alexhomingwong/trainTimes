@@ -7,9 +7,11 @@ export interface IArrivalTimes {
   platformNumber: string;
 }
 
-export const formatArrivalData = (arrivals: any): IArrivalTimes[] => {
+export const formatArrivalData = (
+  arrivals: any
+): Record<string, IArrivalTimes[]> => {
   if (Array.isArray(arrivals)) {
-    return arrivals.map((arrival) => {
+    const formattedArrivals = arrivals.map((arrival) => {
       const platformNumberRegex = /(?<=Platform )(\d*)/gm;
       const directionRegex = /(.*bound)/gm;
 
@@ -25,7 +27,24 @@ export const formatArrivalData = (arrivals: any): IArrivalTimes[] => {
         direction: direction || "",
       };
     });
+
+    const groupByPlatform = formattedArrivals.reduce<
+      Record<string, IArrivalTimes[]>
+    >((acc, arrival) => {
+      const { platformNumber } = arrival;
+      // If no platform number, then place it into the other group
+      if (!platformNumber) return { ...acc, other: [...acc.other, arrival] };
+
+      // If the platform has already been added, add the arrival to the platform
+      if (acc[platformNumber])
+        return { ...acc, [platformNumber]: [...acc[platformNumber], arrival] };
+
+      // The platform has not been indexed yet so create a new group indexed by platform number
+      return { ...acc, [platformNumber]: [arrival] };
+    }, {});
+
+    return groupByPlatform;
   }
 
-  return [];
+  return {};
 };

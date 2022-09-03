@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrivalCard } from "./ArrivalCard";
+import { PlatformColumn } from "./PlatformColumn";
 import { useCurrentStation } from "./useCurrentStation";
 import { useArrivalTimes } from "./useArrivalTimes";
 
@@ -11,9 +11,13 @@ export const App = () => {
     <>
       <h3>Current Station</h3>
       <h1>{stationName}</h1>
-      {arrivalTimes.map((arrival) => {
-        return <ArrivalCard key={arrival.id} {...arrival} />;
-      })}
+      {Object.entries(arrivalTimes).map(([platformNumber, arrivals]) => (
+        <PlatformColumn
+          key={`platform${platformNumber}`}
+          arrivals={arrivals}
+          platformNumber={platformNumber}
+        />
+      ))}
     </>
   );
 };

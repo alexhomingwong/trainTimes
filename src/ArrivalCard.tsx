@@ -21,7 +21,6 @@ export const ArrivalCard = ({
       <span>Expected Arrival: {expectedArrival}</span>
       <span>{timeToStation} seconds</span>
       <span>{lineName}</span>
-      <span>Platform {platformNumber}</span>
       <span>Direction: {direction}</span>
     </Card>
   );

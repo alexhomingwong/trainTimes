@@ -5,7 +5,9 @@ import { formatArrivalData, IArrivalTimes } from "./services";
 
 export const useArrivalTimes = (stationId?: string) => {
   // Need to type the response of the api
-  const [arrivalTimes, setArrivalTimes] = useState<IArrivalTimes[]>([]);
+  const [arrivalTimes, setArrivalTimes] = useState<
+    Record<string, IArrivalTimes[]>
+  >({});
 
   // Fetch the arrival times based on stations id
   useQuery(stationId || "stationId", async () => {
