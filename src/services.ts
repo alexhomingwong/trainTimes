@@ -43,6 +43,13 @@ export const formatArrivalData = (
       return { ...acc, [platformNumber]: [arrival] };
     }, {});
 
+    // Sort the arrivals by the timeToStation as I assumed expected arrival can be delayed/not accurate
+    Object.keys(groupByPlatform).forEach((platformNumber) => {
+      groupByPlatform[platformNumber].sort((a, b) => {
+        return a.timeToStation - b.timeToStation;
+      });
+    });
+
     return groupByPlatform;
   }
 
